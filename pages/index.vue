@@ -20,6 +20,8 @@ export default {
   name: 'PortfolioPage',
   mounted() {
     gsap.registerPlugin(ScrollTrigger);
+
+    // Animate elements with animate__animated class on scroll
     gsap.from('.animate__animated', {
       scrollTrigger: {
         trigger: '.animate__animated',
@@ -30,6 +32,23 @@ export default {
       y: 50,
       duration: 1,
       stagger: 0.2,
+    });
+
+    // List of section IDs you want to track
+    const sections = ['home', 'about', 'education', 'skills', 'experience', 'contact'];
+
+    sections.forEach((id) => {
+      ScrollTrigger.create({
+        trigger: `#${id}`,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => {
+          history.replaceState(null, null, `#${id}`);
+        },
+        onEnterBack: () => {
+          history.replaceState(null, null, `#${id}`);
+        },
+      });
     });
   },
 };
