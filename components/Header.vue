@@ -8,7 +8,6 @@
         <ul class="flex space-x-6">
           <li><a href="#home" class="relative hover-underline text-green-400">Home</a></li>
           <li><a href="#about" class="relative hover-underline text-green-400">About</a></li>
-          <li><a href="#education" class="relative hover-underline text-green-400">Education</a></li>
           <li><a href="#skills" class="relative hover-underline text-green-400">Skills</a></li>
           <li><a href="#experience" class="relative hover-underline text-green-400">Experience</a></li>
           <li><a href="#contact" class="relative hover-underline text-green-400">Contact</a></li>

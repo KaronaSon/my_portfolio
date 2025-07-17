@@ -3,7 +3,6 @@
     <Header />
     <Home />
     <About />
-    <Education />
     <Skills />
     <Experience />
     <Contact />
