@@ -66,7 +66,7 @@
           <!-- CTA Buttons (Small) -->
           <div class="flex flex-row justify-center items-center gap-5 mt-10">
             <!-- Download CV -->
-            <a href="/karona.pdf" download class="w-[220px] px-5 py-3 text-white text-sm font-semibold rounded-xl shadow-lg text-center
+            <a href="/son_karona.pdf" download class="w-[220px] px-5 py-3 text-white text-sm font-semibold rounded-xl shadow-lg text-center
            animate-gradient-green button-hover-light">
               📄 Download CV
             </a>
