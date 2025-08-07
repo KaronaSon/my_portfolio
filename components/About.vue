@@ -47,7 +47,6 @@
                 <li><strong>📏 Height:</strong> 155 cm</li>
               </ul>
             </div>
-
             <div
               class="bg-gray-800 p-6 w-[400px] rounded-2xl border border-teal-500 hover:shadow-teal-500/30 shadow-xl text-sm">
               <h3 class="text-2xl font-semibold text-teal-400 mb-4">💎 Characteristics</h3>
@@ -66,7 +65,7 @@
           <!-- CTA Buttons (Small) -->
           <div class="flex flex-row justify-center items-center gap-5 mt-10">
             <!-- Download CV -->
-            <a href="/son_karona.pdf" download class="w-[220px] px-5 py-3 text-white text-sm font-semibold rounded-xl shadow-lg text-center
+            <a href="/CV.pdf" download class="w-[220px] px-5 py-3 text-white text-sm font-semibold rounded-xl shadow-lg text-center
            animate-gradient-green button-hover-light">
               📄 Download CV
             </a>

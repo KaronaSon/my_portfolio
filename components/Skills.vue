@@ -1,207 +1,44 @@
 <template>
-  <section id="skills" class="py-20 bg-black text-white">
-    <div class="container mx-auto px-4 max-w-6xl">
-      <h2
-        class="text-5xl font-bold bg-gradient-to-r from-green-400 to-teal-500 bg-clip-text text-transparent text-center md:text-left mb-6">
-        Skills
+  <section id="skills" class="min-h-screen bg-gradient-to-br from-black to-black text-white px-6 py-16">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h2 class="text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500 mb-12">
+        My Skills
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="flex flex-row gap-6 overflow-x-auto px-2 py-4 max-w-full no-scrollbar">
-          <div class="glow-border rounded-xl p-4 w-64 h-20 text-left mb-4">
-            <h3
-              class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500 tracking-wide drop-shadow-md">
-              Languages Databases
-            </h3>
-          </div>
 
-          <!-- HTML -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-green-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(34,197,94,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/html-5.png" alt="HTML" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-green-400 drop-shadow-md text-center">HTML</span>
-          </div>
+      <div v-for="(section, index) in skillSections" :key="index" class="mb-10">
+        <button
+          @click="toggleSection(index)"
+          class="w-full flex justify-between items-center bg-gray-800 px-6 py-4 rounded-xl border border-green-500 text-left text-2xl font-bold hover:shadow-lg hover:shadow-green-500/20 hover:scale-[1.01] transition-all duration-300"
+        >
+          <span class="text-green-400">{{ section.title }}</span>
+          <span
+            :class="{
+              'rotate-180': openSections[index],
+              'rotate-0': !openSections[index],
+            }"
+            class="transition-transform duration-300 text-green-300 text-xl"
+          >&#9660;</span>
+        </button>
 
-          <!-- CSS -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-blue-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(59,130,246,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/css.png" alt="CSS" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-blue-400 drop-shadow-md text-center">CSS</span>
+        <transition name="fade-expand">
+          <div
+            v-show="openSections[index]"
+            class="grid grid-cols-4 md:grid-cols-3 gap-6 mt-6 px-4 relative overflow-hidden"
+          >
+            <div
+              v-for="skill in section.skills"
+              :key="skill.name"
+              class="bg-gray-900 border border-gray-700 rounded-xl p-4 flex flex-col items-center transition-all duration-300 transform hover:scale-105 hover:border-green-400 hover:shadow-md hover:shadow-green-500/10"
+            >
+              <img
+                :src="skill.icon"
+                :alt="skill.name"
+                class="w-10 h-10 md:w-12 md:h-12 mb-2 object-contain filter brightness-110 transition animate-pretty-slide"
+              />
+              <span class="text-sm font-medium text-center text-green-300">{{ skill.name }}</span>
+            </div>
           </div>
-
-          <!-- JavaScript -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-yellow-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(234,179,8,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/javascript.png" alt="JavaScript" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-yellow-400 drop-shadow-md text-center">JavaScript</span>
-          </div>
-
-          <!-- Python -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-blue-600 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(37,99,235,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/python.png" alt="Python" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-blue-600 drop-shadow-md text-center">Python</span>
-          </div>
-
-          <!-- Java -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-red-500 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(239,68,68,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/java1.png" alt="Java" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-red-500 drop-shadow-md text-center">Java</span>
-          </div>
-
-          <!-- Dart -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-cyan-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(6,182,212,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/dart.png" alt="Dart" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-cyan-400 drop-shadow-md text-center">Dart</span>
-          </div>
-
-          <!-- MySQL -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-indigo-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(129,140,248,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/mysql.png" alt="MySQL" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-indigo-400 drop-shadow-md text-center">MySQL</span>
-          </div>
-
-          <!-- SQL -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-teal-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(20,184,166,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/sql.png" alt="SQL" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-teal-400 drop-shadow-md text-center">SQL</span>
-          </div>
-        </div>
-
-        <!-- Frameworks & Libraries -->
-        <div class="flex flex-row gap-6 overflow-x-auto px-2 py-4 max-w-full no-scrollbar">
-          <!-- Heading (optional to scroll with cards) -->
-          <div class="glow-border rounded-xl p-4 w-64 h-20 text-left mb-4">
-            <h3
-              class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500 tracking-wide drop-shadow-md">
-              Frameworks Libraries
-            </h3>
-          </div>
-
-          <!-- Flutter -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-purple-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(192,132,252,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/flutter.png" alt="Flutter" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-purple-400 drop-shadow-md text-center">Flutter</span>
-          </div>
-
-          <!-- TailwindCSS -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-sky-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(56,189,248,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/tailwind_css.png" alt="TailwindCSS" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-sky-400 drop-shadow-md text-center">TailwindCSS</span>
-          </div>
-
-          <!-- FastAPI -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-emerald-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(52,211,153,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/fastapi.png" alt="FastAPI"
-              class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-emerald-400 drop-shadow-md text-center">FastAPI</span>
-          </div>
-
-          <!-- Nuxt.js -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-orange-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(251,146,60,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/nuxt.png" alt="Nuxt.js" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-orange-400 drop-shadow-md text-center">Nuxt.js</span>
-          </div>
-
-          <!-- Vue.js -->
-          <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-red-400 border-opacity-60
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(248,113,113,0.8)] transition-transform duration-300 cursor-pointer
-    hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/vue.png" alt="Vue.js" class="w-16 h-16 object-contain filter brightness-110" />
-            <span class="text-base font-semibold text-red-400 drop-shadow-md text-center">Vue.js</span>
-          </div>
-
-        </div>
-        <!-- Testing & Tools -->
-        <div class="flex flex-row gap-6 overflow-x-auto px-2 py-4 max-w-full no-scrollbar">
-          <div class="glow-border rounded-xl p-4 w-64 h-20 text-left mb-4">
-            <h3
-              class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500 tracking-wide drop-shadow-md">
-              Testing Tools
-            </h3>
-          </div>
-
-          <!-- Git (Indigo) -->
-          <div class="flex flex-col items-center p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-indigo-500 border-opacity-70
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(99,102,241,0.8)]
-    transition-transform duration-300 cursor-pointer hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/git.png" alt="Git" class="w-16 h-16 object-contain filter brightness-110 mb-2" />
-            <span class="text-base font-semibold text-indigo-400 drop-shadow-md text-center">Git</span>
-          </div>
-
-          <!-- GitHub (Cyan) -->
-          <div class="flex flex-col items-center p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-cyan-500 border-opacity-70
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(6,182,212,0.8)]
-    transition-transform duration-300 cursor-pointer hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/github.png" alt="GitHub"
-              class="w-16 h-16 object-contain filter brightness-110 mb-2" />
-            <span class="text-base font-semibold text-cyan-400 drop-shadow-md text-center">GitHub</span>
-          </div>
-
-          <!-- GitLab (Fuchsia) -->
-          <div class="flex flex-col items-center p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-fuchsia-500 border-opacity-70
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(217,70,239,0.8)]
-    transition-transform duration-300 cursor-pointer hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/gitlab.png" alt="GitLab"
-              class="w-16 h-16 object-contain filter brightness-110 mb-2" />
-            <span class="text-base font-semibold text-fuchsia-400 drop-shadow-md text-center">GitLab</span>
-          </div>
-
-          <!-- Docker (Teal) -->
-          <div class="flex flex-col items-center p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-teal-500 border-opacity-70
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(20,184,166,0.8)]
-    transition-transform duration-300 cursor-pointer hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/docker.png" alt="Docker"
-              class="w-16 h-16 object-contain filter brightness-110 mb-2" />
-            <span class="text-base font-semibold text-teal-400 drop-shadow-md text-center">Docker</span>
-          </div>
-
-          <!-- Postman (Pink) -->
-          <div class="flex flex-col items-center p-4 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900
-    border border-pink-500 border-opacity-70
-    shadow-md hover:scale-110 hover:shadow-[0_0_20px_6px_rgba(236,72,153,0.8)]
-    transition-transform duration-300 cursor-pointer hover:border-opacity-100 w-48 flex-shrink-0">
-            <img src="/img/framework/postman.png" alt="Postman"
-              class="w-16 h-16 object-contain filter brightness-110 mb-2" />
-            <span class="text-base font-semibold text-pink-400 drop-shadow-md text-center">Postman</span>
-          </div>
-        </div>
+        </transition>
       </div>
     </div>
   </section>
@@ -210,24 +47,100 @@
 <script>
 export default {
   name: 'Skills',
+  data() {
+    return {
+      openSections: [true, false, false],
+      skillSections: [
+        {
+          title: 'Languages & Databases',
+          skills: [
+            { name: 'HTML', icon: '/img/html-5.png' },
+            { name: 'CSS', icon: '/img/css.png' },
+            { name: 'JavaScript', icon: '/img/javascript.png' },
+            { name: 'Python', icon: '/img/python.png' },
+            { name: 'Java', icon: '/img/java1.png' },
+            { name: 'Dart', icon: '/img/dart.png' },
+            { name: 'MySQL', icon: '/img/mysql.png' },
+            { name: 'SQL', icon: '/img/sql.png' },
+          ],
+        },
+        {
+          title: 'Frameworks & Libraries',
+          skills: [
+            { name: 'Flutter', icon: '/img/flutter.png' },
+            { name: 'TailwindCSS', icon: '/img/tailwind_css.png' },
+            { name: 'FastAPI', icon: '/img/framework/fastapi.png' },
+            { name: 'Nuxt.js', icon: '/img/framework/nuxt.png' },
+            { name: 'Vue.js', icon: '/img/framework/vue.png' },
+          ],
+        },
+        {
+          title: 'Tools & Testing',
+          skills: [
+            { name: 'Git', icon: '/img/framework/git.png' },
+            { name: 'GitHub', icon: '/img/framework/github.png' },
+            { name: 'GitLab', icon: '/img/framework/gitlab.png' },
+            { name: 'Docker', icon: '/img/framework/docker.png' },
+            { name: 'Postman', icon: '/img/framework/postman.png' },
+          ],
+        },
+      ],
+    };
+  },
+  methods: {
+    toggleSection(index) {
+      this.openSections[index] = !this.openSections[index];
+    },
+  },
 };
 </script>
-<style>
-.glow-border {
-  border: 2px solid #10b981;
-  box-shadow: 0 0 10px #10b981, 0 0 20px #10b981, 0 0 30px #10b981;
-  animation: glowPulse 2s infinite ease-in-out;
+
+<style scoped>
+.fade-expand-enter-active,
+.fade-expand-leave-active {
+  transition: all 0.4s ease-in-out;
+}
+.fade-expand-enter-from,
+.fade-expand-leave-to {
+  opacity: 0;
+  transform: scale(0.95) translateY(-10px);
 }
 
-@keyframes glowPulse {
+/* Neon border effect for skill icons */
+.neon-border {
+  border: 1px solid #00FF99;
+  border-radius: 4px;
+  padding: 1px;
+  box-shadow: 0 0 4px #00FF99, 0 0 8px rgba(0, 255, 153, 0.6);
+  transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+.neon-border:hover {
+  border-color: #00FFCC;
+  box-shadow: 0 0 6px #00FFCC, 0 0 12px rgba(0, 255, 204, 0.8);
+}
 
-  0%,
-  100% {
-    box-shadow: 0 0 10px #10b981, 0 0 20px #10b981;
+/* Prettier right-to-left animation with bounce and glow */
+.animate-pretty-slide {
+  animation: prettySlide 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes prettySlide {
+  0% {
+    transform: translateX(100%) scale(0.9);
+    opacity: 0;
+    filter: brightness(0.5);
   }
-
-  50% {
-    box-shadow: 0 0 20px #10b981, 0 0 30px #10b981;
+  70% {
+    transform: translateX(10%) scale(1.05);
+    opacity: 1;
+    filter: brightness(1.2);
+    box-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    filter: brightness(1.1);
+    box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
   }
 }
 </style>
